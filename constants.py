@@ -1,5 +1,6 @@
 # For setup file
 DEFAULT_SETUP_YAML_PATH = 'task_setup.yaml'
+SETUP_YAML_DATA_DIR_KEY = 'data_dir'
 SETUP_YAML_DIM_KEY = 'dim'
 SETUP_YAML_TASKS_KEY = 'eval_tasks'
 SETUP_YAML_EMB_KEY = 'emb_file'

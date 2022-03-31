@@ -51,6 +51,11 @@ def _load_train_df(ss: SparkSession, path: str) -> DataFrame:
     return df
 
 
+def _add_emb_col(df: DataFrame, emb_df: DataFrame) -> DataFrame:
+    emb_df = emb_df.select(c.ID_COL, c.EMB_COL)
+    return df.join(emb_df, c.ID_COL)
+
+
 def _load_test_df(ss: SparkSession, path: str, dim: int) -> DataFrame:
     df = ss.read.parquet(path)
 

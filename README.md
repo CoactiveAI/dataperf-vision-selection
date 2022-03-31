@@ -1,4 +1,5 @@
-# dataperf-speech-example
+# Dataperf visual: a data-centric visual benchmark for training data selection
+### current version: alpha 
 Example workflow for our data-centric speech benchmark
 
 ### Terminology

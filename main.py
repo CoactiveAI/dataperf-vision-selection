@@ -22,9 +22,8 @@ def run_tasks(setup_yaml_path: str = c.DEFAULT_SETUP_YAML_PATH) -> None:
 
     ss = utils.get_spark_session(task_setup[c.SETUP_YAML_SPARK_MEM_KEY])
 
-    print('\nLoading embeddings...', end='')
+    print('Loading embeddings')
     emb_df = utils.load_emb_df(ss=ss, path=emb_path, dim=dim)
-    print('Done\n')
 
     task_paths = {
         task: task_setup[task] for task in task_setup[c.SETUP_YAML_TASKS_KEY]}
@@ -33,22 +32,18 @@ def run_tasks(setup_yaml_path: str = c.DEFAULT_SETUP_YAML_PATH) -> None:
         print(f'Evaluating task: {task}')
         train_path, test_path = [os.path.join(data_dir, p) for p in paths]
 
-        print(f'Loading training data for {task}...', end='')
+        print(f'Loading training data for {task}...')
         train_df = utils.load_train_df(ss=ss, path=train_path)
         train_df = utils.add_emb_col(df=train_df, emb_df=emb_df)
-        print('Done')
 
-        print(f'Loading test data for {task}...', end='')
+        print(f'Loading test data for {task}...')
         test_df = utils.load_test_df(ss=ss, path=test_path, dim=dim)
-        print('Done')
 
-        print(f'Training classifier for {task}...', end='')
+        print(f'Training classifier for {task}...')
         clf = eval.get_trained_classifier(df=train_df)
-        print('Done')
 
-        print(f'Scoring trained classifier for {task}...', end='')
+        print(f'Scoring trained classifier for {task}...\n')
         task_scores[task] = eval.score_classifier(df=test_df, clf=clf)
-        print('Done\n')
 
     save_dir = os.path.join(data_dir, task_setup[c.SETUP_YAML_RESULTS_KEY])
     utils.save_results(data=task_scores, save_dir=save_dir, verbose=True)

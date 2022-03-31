@@ -1,0 +1,19 @@
+# Embedding dimensionality
+dim: 256
+
+# Spark driver memory (recommend > 6g)
+spark_driver_memory: '6g'
+
+# Path for embedding file
+emb_file: 'data/embeddings/train_emb_256_dataperf.parquet'
+
+# Task name: [path to training set, path to test set]
+Cupcake: ['data/train_sets/random_500.csv', 'data/test_sets/alpha_test_set_Cupcake_256.parquet']
+Hawk: ['data/train_sets/random_500.csv', 'data/test_sets/alpha_test_set_Hawk_256.parquet']
+Sushi: ['data/train_sets/random_500.csv', 'data/test_sets/alpha_test_set_Sushi_256.parquet']
+
+# List the names of tasks to evaluate
+eval_tasks: ['Hawk']
+
+# Path for results file
+results_dir: 'data/results'

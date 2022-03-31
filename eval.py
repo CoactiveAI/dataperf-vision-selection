@@ -1,33 +1,35 @@
-import fire
+from typing import Optional
+
+from pyspark.sql import DataFrame
+from sklearn.base import BaseEstimator
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, recall_score,\
+    precision_score, f1_score
 
 import constants as c
-import utils as utils
-import core as core
 
 
-def main(setup_yaml_path=c.SETUP_YAML_PATH):
-    task_setup = utils._load_yaml(setup_yaml_path)
-    dim = task_setup[c.SETUP_YAML_DIM_KEY]
-    emb_path = task_setup[c.SETUP_YAML_EMB_KEY]
+def get_trained_classifier(
+    df: DataFrame,
+    clf: Optional[BaseEstimator] = LogisticRegression(
+        random_state=c.RANDOM_SEED)) -> BaseEstimator:
 
-    ss = utils._get_spark_session(task_setup[c.SETUP_YAML_SPARK_MEM_KEY])
-    emb_df = utils._load_emb_df(ss=ss, path=emb_path, dim=dim)
+    df = df.select(c.LABEL_COL, c.EMB_COL).toPandas()
+    X = df[c.EMB_COL].values.tolist()
+    y = df[c.LABEL_COL].values.tolist()
 
-    task_paths = {
-        task: task_setup[task] for task in task_setup[c.SETUP_YAML_TASKS_KEY]}
-    task_scores = {}
-    for task, paths in task_paths.items():
-        train_path, test_path = paths
-        train_df = utils._load_train_df(ss=ss, path=train_path)
-        train_df = utils._add_emb_col(df=train_df, emb_df=emb_df)
-        test_df = utils._load_test_df(ss=ss, path=test_path, dim=dim)
-
-        clf = core._get_trained_classifier(df=train_df)
-        task_scores[task] = core._score_classifier(df=test_df, clf=clf)
-
-    save_dir = task_setup[c.SETUP_YAML_RESULTS_KEY]
-    utils._save_results(data=task_scores, save_dir=save_dir, verbose=True)
+    return clf.fit(X, y)
 
 
-if __name__ == "__main__":
-    fire.Fire(main)
+def score_classifier(df: DataFrame, clf: BaseEstimator) -> dict:
+    df = df.select(c.LABEL_COL, c.EMB_COL).toPandas()
+    X = df[c.EMB_COL].values.tolist()
+    y = df[c.LABEL_COL].values.tolist()
+    y_pred = clf.predict(X).tolist()
+
+    scores = {}
+    scores['accuracy'] = accuracy_score(y, y_pred)
+    scores['recall'] = recall_score(y, y_pred, pos_label='1')
+    scores['precision'] = precision_score(y, y_pred, pos_label='1')
+    scores['f1'] = f1_score(y, y_pred, pos_label='1')
+    return scores

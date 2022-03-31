@@ -7,7 +7,14 @@ import utils as utils
 import eval as eval
 
 
-def main(setup_yaml_path=c.DEFAULT_SETUP_YAML_PATH):
+def run_tasks(setup_yaml_path: str = c.DEFAULT_SETUP_YAML_PATH) -> None:
+    """Runs visual benchmark tasks based on config yaml file.
+
+    Args:
+        setup_yaml_path (str, optional): Path for config file. Defaults
+            to path in constants.DEFAULT_SETUP_YAML_PATH.
+    """
+
     task_setup = utils.load_yaml(setup_yaml_path)
     data_dir = task_setup[c.SETUP_YAML_DATA_DIR_KEY]
     dim = task_setup[c.SETUP_YAML_DIM_KEY]
@@ -48,4 +55,4 @@ def main(setup_yaml_path=c.DEFAULT_SETUP_YAML_PATH):
 
 
 if __name__ == "__main__":
-    fire.Fire(main)
+    fire.Fire(run_tasks)

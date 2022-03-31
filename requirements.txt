@@ -2,3 +2,4 @@ pyspark
 pyyaml
 fire
 sklearn
+pandas

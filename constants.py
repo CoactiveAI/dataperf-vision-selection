@@ -12,7 +12,7 @@ ID_COL = 'ImageID'
 LABEL_COL = 'Confidence'
 
 # For results
-RESULT_FILE_PREFIX = 'result_'
+RESULT_FILE_PREFIX = 'result'
 
 # General
 RANDOM_SEED = 0

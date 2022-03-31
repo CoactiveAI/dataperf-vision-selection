@@ -13,7 +13,7 @@ Hawk: ['data/train_sets/random_500.csv', 'data/test_sets/alpha_test_set_Hawk_256
 Sushi: ['data/train_sets/random_500.csv', 'data/test_sets/alpha_test_set_Sushi_256.parquet']
 
 # List the names of tasks to evaluate
-eval_tasks: ['Hawk']
+eval_tasks: ['Cupcake','Hawk','Sushi']
 
 # Path for results file
 results_dir: 'data/results'

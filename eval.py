@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Dict
 
 from pyspark.sql import DataFrame
 from sklearn.base import BaseEstimator
@@ -21,7 +21,7 @@ def get_trained_classifier(
     return clf.fit(X, y)
 
 
-def score_classifier(df: DataFrame, clf: BaseEstimator) -> dict:
+def score_classifier(df: DataFrame, clf: BaseEstimator) -> Dict[str, float]:
     df = df.select(c.LABEL_COL, c.EMB_COL).toPandas()
     X = df[c.EMB_COL].values.tolist()
     y = df[c.LABEL_COL].values.tolist()

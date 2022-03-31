@@ -79,5 +79,4 @@ def _save_results(data: dict, save_dir: str, verbose=False) -> None:
 
     if verbose:
         print(f'Results saved in {path}')
-        with open(path, 'r') as f:
-            print(json.dumps(json.load(f), indent=4))
+        print(json.dumps(data, indent=4))

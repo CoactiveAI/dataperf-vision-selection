@@ -73,7 +73,7 @@ To test the containerized offline evaluation, run
 
 ```
 cd dataperf-vision-selection
-docker-compose up --build --force-recreate 
+docker-compose up
 ```
 
 Similarly, to test the local python offline evaluation, run
@@ -127,7 +127,7 @@ The configuration for the offline evaluation is specified in `task_setup.yaml` f
 3. Run offline evaluation
 4. See results in stdout and results file in `data/results/`
 
-
+For example
 ```
 # 1. Copy training sets for each task
 cd dataperf-vision-selection
@@ -171,14 +171,15 @@ cat data/results/result_UTC-2022-03-31-20-19-24.json
 }       
 ```
 
-Though we recommend working as described above, you can specify a custom task setup .yaml file and/or data folder if needed. For the containerized offline evaluation, modify the following files and run as follows
+Though we recommend working as described above, you can specify a custom task setup .yaml file and/or data folder if needed. 
 
+For the containerized offline evaluation, modify the following files and run as follows
 ```
-# docker-compose.yaml: modify the source volume
+# docker-compose.yaml: modify the volume source
     volumes:
       - path/to/your/data/folder:/app/data
 
-# Dockerfile: modify the .yaml copy and add specify the file in the entrypoint
+# Dockerfile: modify the COPY *.yaml command and specify the new file in the entrypoint
 COPY path/to/your/custom_task_setup.yaml /app/
 ...
 ENTRYPOINT python3 main.py --docker_flag True --setup_yaml_path 'custom_task_setup.yaml'

@@ -7,22 +7,26 @@ import utils as utils
 import eval as eval
 
 
-def run_tasks(setup_yaml_path: str = c.DEFAULT_SETUP_YAML_PATH) -> None:
+def run_tasks(
+        setup_yaml_path: str = c.DEFAULT_SETUP_YAML_PATH,
+        docker_flag: bool = False) -> None:
     """Runs visual benchmark tasks based on config yaml file.
 
     Args:
         setup_yaml_path (str, optional): Path for config file. Defaults
             to path in constants.DEFAULT_SETUP_YAML_PATH.
+        docker_flag (bool, optional): True when running in container
     """
-
     task_setup = utils.load_yaml(setup_yaml_path)
-    data_dir = task_setup[c.SETUP_YAML_DATA_DIR_KEY]
+    data_dir_key = c.SETUP_YAML_DOCKER_DATA_DIR_KEY if docker_flag \
+        else c.SETUP_YAML_LOCAL_DATA_DIR_KEY
+    data_dir = task_setup[data_dir_key]
     dim = task_setup[c.SETUP_YAML_DIM_KEY]
     emb_path = os.path.join(data_dir, task_setup[c.SETUP_YAML_EMB_KEY])
 
     ss = utils.get_spark_session(task_setup[c.SETUP_YAML_SPARK_MEM_KEY])
 
-    print('Loading embeddings')
+    print('Loading embeddings\n')
     emb_df = utils.load_emb_df(ss=ss, path=emb_path, dim=dim)
 
     task_paths = {

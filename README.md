@@ -2,7 +2,7 @@
 ### **Current version:** alpha 
 This github repo serves as the starting point for offline evaluation of submissions for the training data selection visual benchmark. The offline evaluation can be run on both your local environment as well as a containerized image for reproducibility of score results.
 
-For a detailed summary of the a benchmark, see the following documentation. [TODO: Add link]
+For a detailed summary of the a benchmark, refer to the provided benchmark documentation.
 
 ## Requirements
 ### Download resources
@@ -10,10 +10,10 @@ The following resources will need to be downloaded locally in order to run offli
 - Embeddings for candidate pool of training images (.parquet file)
 - Test sets for each classification task (.parquet files)
 
-These resources can be downloaded in a .zip file with the following command [TODO: Add correct download link]
+These resources can be downloaded in a .zip file at the following url
 
 ```
-curl -L https://some.website.link/dataperf-visual-selection-resources.zip
+https://drive.google.com/drive/folders/1wyb-EhmF5i2w7f8Ybqokdnrs6yjduiyL?usp=sharing
 ```
 
 ### Install dependencies

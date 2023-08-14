@@ -267,3 +267,13 @@ TBD.
 ## Closed Division: Offline evaluation of a submission
 
 TBD.
+
+# Baselines
+
+In the `baselines/` directory, we include the winning submission for the beta version of this challenge, which also acts as our baseline. The method is called FPSCV (Farthest Point Sampling Cross-Validation). Official repository for this submission can be found at [Submission-Dataperf-Vision-Challenge](https://github.com/PaClimaco/Submissions-Dataperf-Vision-Challenge/), which also includes a detailed report on this method.
+
+```
+# Run the baseline
+cd baselines
+python3 fpscv.py
+```

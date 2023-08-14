@@ -58,6 +58,7 @@ A template filesystem with the following structure is provided in the repo. Move
 ```
 unzip dataperf-vision-selection-resources.zip
 mv dataperf-vision-selection-resources/embeddings/* dataperf-vision-selection/data/embeddings/
+mv dataperf-vision-selection-resources/examples/* dataperf-vision-selection/data/examples/
 mv dataperf-vision-selection-resources/test_sets/* dataperf-vision-selection/data/test_sets/
 mv dataperf-vision-selection-resources/train_sets/* dataperf-vision-selection/data/train_sets/
 mv dataperf-vision-selection-resources/results/* dataperf-vision-selection/data/results/
@@ -69,6 +70,10 @@ The resulting filesystem in the repo should look as follows
 |____data
 | |____embeddings
 | | |____train_emb_256_dataperf.parquet
+| |____examples
+| | |____alpha_example_set_Hawk.csv
+| | |____alpha_example_set_Cupcake.csv
+| | |____alpha_example_set_Sushi.csv
 | |____test_sets
 | | |____alpha_test_set_Hawk_256.parquet
 | | |____alpha_test_set_Cupcake_256.parquet

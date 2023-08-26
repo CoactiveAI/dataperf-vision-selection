@@ -29,8 +29,8 @@ with warnings.catch_warnings():
 # PATHS
 # -----------------------------------------
 
-embeddings_path = "../data/embeddings/train_emb_256_dataperf.parquet"
-examples_path = "../data/examples/"
+embeddings_path = "../../data/embeddings/train_emb_256_dataperf.parquet"
+examples_path = "../../data/examples/"
 output_path = "output_repo/"  # Change
 machine_human_labels_path = os.path.join(
     output_path, "oidv6-train-annotations-human-imagelabels.csv"

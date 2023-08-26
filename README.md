@@ -270,10 +270,15 @@ TBD.
 
 # Baselines
 
-In the `baselines/` directory, we include the winning submission for the beta version of this challenge, which also acts as our baseline. The method is called FPSCV (Farthest Point Sampling Cross-Validation). Official repository for this submission can be found at [Submission-Dataperf-Vision-Challenge](https://github.com/PaClimaco/Submissions-Dataperf-Vision-Challenge/), which also includes a detailed report on this method.
+In the `baselines/` directory, we include the winning submissions for the beta version of this challenge, which also act as our baseline. The methods are: 
+1. FPSCV (Farthest Point Sampling Cross-Validation) by Paolo Climenco: This method selects negative examples by attempting to sample the feature search space through iterative maximum l2 distances, afterwards
+returning the best coreset under nested cross-validation.Official repository for this submission can be found at [Submission-Dataperf-Vision-Challenge](https://github.com/PaClimaco/Submissions-Dataperf-Vision-Challenge/), which also includes a detailed report on this method
+2. Pseudo Label Generation by Danilo Brajovic: This method  trains multiple neural networks and classical models on a subset of data to classify the remainder of points and uses the best-performing model for coreset proposal under multiple sampling experiments
+3. Modified Uncertainty Sampling by Steve Mussmann: This method trains a binary classifier on noisy positive labels from OpenImages and uses this classifier to assign positive and negative image pools, with the coreset randomly sampled from both pools.
 
 ```
 # Run the baseline
-cd baselines
-python3 fpscv.py
+python3 baselines/fpscv/run.py
+python3 baselines/pseudo_label_generation/run.py
+python3 baselines/modified_uncertainty_sampling/run.py
 ```

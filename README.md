@@ -275,6 +275,7 @@ In the `baselines/` directory, we include the winning submissions for the beta v
 returning the best coreset under nested cross-validation.Official repository for this submission can be found at [Submission-Dataperf-Vision-Challenge](https://github.com/PaClimaco/Submissions-Dataperf-Vision-Challenge/), which also includes a detailed report on this method
 2. Pseudo Label Generation by Danilo Brajovic: This method  trains multiple neural networks and classical models on a subset of data to classify the remainder of points and uses the best-performing model for coreset proposal under multiple sampling experiments
 3. Modified Uncertainty Sampling by Steve Mussmann: This method trains a binary classifier on noisy positive labels from OpenImages and uses this classifier to assign positive and negative image pools, with the coreset randomly sampled from both pools.
+Rafael Mosquera experiemnted with some classical and neural network based models, which we have included under `other_experiments/`.
 
 ```
 # Run the baseline
